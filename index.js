@@ -10,30 +10,30 @@ function setCart(c) {
 }
 
 function addToCart(item) {
-  var obj = { itemName: item, itemPrice: Math.floor(Math.random() * 100) };
+  var price = Math.floor(Math.random() * 100 +1);
+  var obj = { itemName: item, itemPrice: price };
   cart.push(obj)
-  
+
   return `${item} has been added to your cart.`
 }
 
 function viewCart() {
-const array = [];
-
-for (let i = 0; i < cart.length; i++) {
-array.push(` ${cart[i]} at $${Math.floor(Math.random() * 100)}`)
-
-  if (cart[i] === array.length) {
-  array.push(` and ${array}.`);
-	} else {
-	array.join(', ')
-      }
+  if (cart.length === 0) {
+    return "Your shopping cart is empty."
+  } else if (cart.length === 1) {
+    return `In your cart, you have ${cart[0].itemName} at $${cart[0].itemPrice}.`
   }
-  
-  if (array.length === 0) {
-console.log("Your shopping cart is empty.");
+  let string = 'In your cart, you have ';
+  const lastElem = cart[cart.length - 1]
+  for (let element of cart) {
+    if (element === lastElem) {
+      string += `and ${element.itemName} at $${element.itemPrice}.`
     } else {
-  return 'In your cart, you have array'
+      string += `${element.itemName} at $${element.itemPrice}, `
+    }
   }
+
+  return string
 }
 
 function total() {
